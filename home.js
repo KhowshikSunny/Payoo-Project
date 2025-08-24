@@ -15,6 +15,31 @@ function getInputValue(id) {
     return inputFieldValue;
 
 }
+// function to get innertext 
+
+function getInnerText(id) {
+    const element = document.getElementById(id)
+    const elementValue = element.innerText
+    const elementValueNumber = parseInt(elementValue)
+    return elementValueNumber;
+}
+
+// function to set inner text 
+function setInnerText(value) {
+    const avalableBalanceElement = document.getElementById('available-balance')
+    avalableBalanceElement.innerText = value;
+
+}
+
+// function to toggle 
+function handleToggle(id) {
+    const forms = document.getElementsByClassName('form');
+
+    for (const form of forms) {
+        form.style.display = 'none'
+    }
+    document.getElementById(id).style.display = 'block'
+}
 
 
 // add money feature 
@@ -28,7 +53,7 @@ document.getElementById('add-money-btn')
 
         const pinNumber = getInputValueNumber('add-pin')
 
-        const avalableBalance = parseInt(document.getElementById('available-balance').innerText)
+        const avalableBalance = getInnerText('available-balance')
 
         if (accountNumber.length < 11) {
             alert('Please Provide Valid account Number')
@@ -43,7 +68,7 @@ document.getElementById('add-money-btn')
 
         const totalNewAvailableBalance = amount + avalableBalance;
 
-        document.getElementById('available-balance').innerText = totalNewAvailableBalance;
+        setInnerText(totalNewAvailableBalance);
 
 
         console.log(avalableBalance, amount, totalNewAvailableBalance)
@@ -54,24 +79,34 @@ document.getElementById('add-money-btn')
 document.getElementById('withdraw-btn').addEventListener('click', function (e) {
     e.preventDefault()
     const amount = getInputValueNumber('withdraw-amount')
-    const avalableBalance = parseInt(document.getElementById('available-balance').innerText)
+    const avalableBalance = getInnerText('available-balance')
 
 
     const totalNewAvailableBalance = avalableBalance - amount;
 
-    document.getElementById('available-balance').innerText = totalNewAvailableBalance;
+    setInnerText(totalNewAvailableBalance);
 
 
 })
 
 
 // toggle feature 
-document.getElementById('add-button').addEventListener('click', function () {
-    document.getElementById('cashout-parent').style.display = "none"
-    document.getElementById('add-money-parent').style.display = 'block'
+document.getElementById('add-button').addEventListener('click', function (e) {
+    handleToggle('add-money-parent')
+})
+document.getElementById('cashout-button').addEventListener('click', function (e) {
+    handleToggle('cashout-parent')
+})
+document.getElementById('transfer-button').addEventListener('click', function (e) {
+    handleToggle('transfer-parent')
+})
+document.getElementById('bonus-button').addEventListener('click', function (e) {
+    handleToggle('get-bonus-parent')
+})
+document.getElementById('pay-bill-button').addEventListener('click', function (e) {
+    handleToggle('pay-bill-parent')
+})
+document.getElementById('transaction-button').addEventListener('click', function (e) {
+    handleToggle('transaction-parent')
 })
 
-document.getElementById('cashout-button').addEventListener('click', function () {
-    document.getElementById('add-money-parent').style.display = "none"
-    document.getElementById('cashout-parent').style.display = 'block'
-})
