@@ -2,7 +2,7 @@ const validPin =1234
 
 
 
-
+// add money feature 
 document.getElementById('add-money-btn')
     .addEventListener("click", function (e) {
         e.preventDefault();
@@ -32,4 +32,32 @@ document.getElementById('add-money-btn')
 
 
         console.log(avalableBalance , amount, totalNewAvailableBalance)
+    })
+
+
+    // cash out feature 
+    document.getElementById('withdraw-btn').addEventListener('click', function(e){
+        e.preventDefault()
+        const amount = parseInt(document.getElementById('withdraw-amount').value )
+        const avalableBalance= parseInt(document.getElementById('available-balance').innerText)
+
+
+        const totalNewAvailableBalance = avalableBalance - amount;
+
+        document.getElementById('available-balance').innerText=totalNewAvailableBalance;
+        console.log(totalNewAvailableBalance)
+
+
+    })
+
+
+    // toggle feature 
+    document.getElementById('add-button').addEventListener('click', function(){
+        document.getElementById('cashout-parent').style.display = "none"
+        document.getElementById('add-money-parent').style.display = 'block'
+    })
+
+    document.getElementById('cashout-button').addEventListener('click', function(){
+        document.getElementById('add-money-parent').style.display = "none"
+        document.getElementById('cashout-parent').style.display = 'block'
     })
